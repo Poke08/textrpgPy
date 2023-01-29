@@ -1,12 +1,14 @@
-playing = False
+import random
 
+playing = False
 setting = ''
 lame_unlocked = False
 Stupid_unlocked = False
 loyal_unlocked = False
+venom_unlocked = False
 
 Endings = []
-allEndings = ["lame","Stupid","Loyal"]
+allEndings = ["lame","Stupid","Loyal","venom"]
 max_ending = len(allEndings)
 
 def checkContinue():
@@ -57,6 +59,51 @@ while playing:
                     if wait_more == 'yes':
                         print('You sat and waited for a month and you\'ve starved to death...')
                         print('Well at least your loyal...')
+                    if loyal_unlocked == True:
+                        print('You have already unlocked this ending!')
+                    else:
+                        print('You have unlocked the "Loyal" ending!')
+                        Endings.append("Loyal")
+                        print(f'You have unlocked {len(Endings)}/{max_ending} endings!')
+                        loyal_unlocked = True
+
+                    if wait_more == 'no':
+                        print('You go back into the jungle, this time you follow the footprints...')
+                        print('After a while you stumble onto a venomous snake...')
+                        snake = input('Try to kill, or try to sneak away?')
+
+                        if snake == 'kill':
+                            snakeKillList = ["kill","die"]
+                            snakeRandom = (random.choice(snakeKillList))
+                            print('You pick up a rock and try to bash its head...')
+
+                            if snakeRandom == "kill":
+                                print('You sucessfully killed the snake!')
+                            
+                            if snakeRandom == "die":
+                                print('You missed it and it bit you...')
+                                print('The venom is really and you died after screaming for 3 minutes in pain and agony...')
+                                if venom_unlocked == True:
+                                    print('You have already unlocked this ending!')
+                                else:
+                                    print('You have unlocked the "Venom" ending!')
+                                    Endings.append("venom")
+                                    print(f'You have unlocked {len(Endings)}/{max_ending} endings!')
+                                    venom_unlocked = True
+
+                        if snake == 'sneak':
+                            print('You try to sneak around the snake...')
+                            print('The snake sees you and hisses at you...')
+                            print('You tried to escape but the snake went in for a bite and hit you in your leg...')
+                            print('The venom makes you weaker and weaker as you travel further into the jungle and suddenly you have to sit down up against a rock...')
+                            print('Only minutes later you\'re dead...')
+                            if venom_unlocked == True:
+                                print('You have already unlocked this ending!')
+                            else:
+                                print('You have unlocked the "Venom" ending!')
+                                Endings.append("venom")
+                                print(f'You have unlocked {len(Endings)}/{max_ending} endings!')
+                                venom_unlocked = True
 
                     if loyal_unlocked == True:
                         print('You have already unlocked this ending!')
@@ -66,13 +113,6 @@ while playing:
                         print(f'You have unlocked {len(Endings)}/{max_ending} endings!')
                         loyal_unlocked = True
                         
-
-                
-                    if wait_more == 'no':
-                        print('You go back to the footprints and decide to follow them...')
-                        print('You follow the footprints for a while and you find the water bottle your tour guide was drinking from earlier...')
-                        bottle = input('Do you pick it up or leave it? ')
-
         elif response == 'wait':
             print('You wait for another 30 minutes, and he is still gone...')
 
