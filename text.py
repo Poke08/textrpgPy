@@ -1,5 +1,5 @@
 import random
-
+ammoCommand = False
 playing = False
 setting = ''
 lame_unlocked = False
@@ -7,16 +7,29 @@ Stupid_unlocked = False
 loyal_unlocked = False
 venom_unlocked = False
 
+flawLessAchievement = False
+
+fullAchievement = False
+Achievements = []
+allAchievements = ["flawless"]
+
 Endings = []
 allEndings = ["lame","Stupid","Loyal","venom"]
 max_ending = len(allEndings)
 
 def checkContinue():
-    for ending in allEndings:
+    for ending in allEndings and fullAchievement == True:
         if ending not in Endings:
             return True
     print(f"{name} you have beat the game!")
     return False
+
+def checkAchievement():
+    for achievement in allAchievements:
+        if achievement not in Achievements:
+            fullAchievement = False
+        else:
+            fullAchievement = True
 
 name = input('Enter your name! ')
 print(f'Greetings {name}!')
@@ -50,6 +63,56 @@ while playing:
             if Follow == 'follow':
                 print('You follow the foot prints for a while and find your tour guides dead body laying up against a tree...')
                 dead = input('You check his body and find a gun and a medkit. Do you take the gun or the medkit? ')
+
+                if dead == 'gun':
+                    ammo = [5]
+                    print('You chose the gun, good choice...')
+                    print('It will maybe be handy if whatever killed the tour guide tries to come for you...')
+                    print(f'You check the magazine and it has {ammo}/8 ammunition...')
+                    print('You see a river nearby...')
+                    river = input('Do you check it out, or continue into the jungle? ')
+                    
+                    if river == 'continue':
+                        print('You continue into the jungle...')
+                        print('You stumble onto some angry monkeys...')
+                        shootMonkey = input ('Do you shoot one, or not? ')
+
+                        if shootMonkey == 'yes':
+                            usedShotsList = ['1','2','3','4','5']
+                            usedShots = (random.choice(usedShotsList))
+                            
+                            if usedShots == '1':
+                                print('You sucessfully killed one of the monkeys and the others ran in fear...')
+                                ammo -= 1
+                                print(f'You have {ammo}/8 ammo left...')
+                                flawLessAchievement = True
+                                print('You\'ve unlocked the "Flawless" achievement!')
+
+                            if usedShots == '2':
+                                print('You sucessfully killed one of the monkeys but you used up two shots...')
+                                ammo -= 2
+                                print(f'You have {ammo}/8 ammo left...')
+
+                            if usedShots == '3':
+                                print('You sucessfully killed one of the monkeys but you used up three shots...')
+                                ammo -= 3
+                                print(f'You have {ammo}/8 ammo left...')
+                            
+                            if usedShots == '4':
+                                print('You sucessfully killed one of the monkeys but you used up four shots...')
+                                ammo -= 4
+                                print(f'You have {ammo}/8 ammo left...')
+                            
+                            if usedShots == '5':
+                                print('You sucessfully killed one of the monkeys but you used up all five of your shots...')
+                                ammo -= 5
+                                print('You are now out of ammo!')
+
+                    if river == 'check':
+                        print('You found a canoe on the shore of the river...')
+                        canoe = input('Do you take it, or go back and continue into the jungle? ')
+
+
             elif Follow == 'go back':
                 print('You go back to the waterfall and wait...')
                 back = input('You wait for 30 minutes, and he is still gone. Do you wait or go back and follow the footprints? ')
@@ -70,7 +133,7 @@ while playing:
                     if wait_more == 'no':
                         print('You go back into the jungle, this time you follow the footprints...')
                         print('After a while you stumble onto a venomous snake...')
-                        snake = input('Try to kill, or try to sneak away?')
+                        snake = input('Try to kill it, or try to sneak away? ')
 
                         if snake == 'kill':
                             snakeKillList = ["kill","die"]
